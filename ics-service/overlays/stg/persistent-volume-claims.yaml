@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ics-stg-msds-nfs-pv-claim
+spec:
+  storageClassName: persistent-nfs-storage
+  volumeName: ics-stg-msds-nfs-pv
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ics-stg-receiptimages-nfs-pv-claim
+spec:
+  storageClassName: persistent-nfs-storage
+  volumeName: ics-stg-receiptimages-nfs-pv
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ics-stg-docimages-nfs-pv-claim
+spec:
+  storageClassName: persistent-nfs-storage
+  volumeName: ics-stg-docimages-nfs-pv
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi

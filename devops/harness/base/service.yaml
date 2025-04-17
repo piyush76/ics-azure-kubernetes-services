@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: delegate-service
+  namespace: ics-devops
+spec:
+  type: ClusterIP
+  selector:
+    harness.io/name: ics-harness-delegate-non-prod
+  ports:
+    - port: 8080
+

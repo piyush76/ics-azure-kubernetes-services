@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ics-service-template
+  name: ics-service-template
+spec:
+  template:
+    spec:
+      containers:
+      - name: ics-service-template
+        image: <+artifact.image>
+        volumeMounts:
+        - name: ics-service-template-tmp-nfs-pv
+          mountPath: /dev/tmp
+      volumes:
+      - name: ics-service-template-tmp-nfs-pv
+        persistentVolumeClaim:
+          claimName: ics-stg-tmp-nfs-pv-claim

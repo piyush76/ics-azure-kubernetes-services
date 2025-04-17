@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ics-stg-tmp-nfs-pv
+  labels:
+    type: ics-stg-temp-nfs-pv
+spec:
+  storageClassName: persistent-nfs-storage
+  claimRef:
+    name: ics-stg-tmp-nfs-pv-claim
+    namespace: ics-stage
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    server: netapp.haasgroupintl.com
+    path: /ics_dev_temp

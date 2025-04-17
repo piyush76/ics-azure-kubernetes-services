@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ics-operations-app
+  name: ics-operations-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ics-operations-app
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: ics-operations-app
+    spec:
+      containers:
+      - name: ics-operations-app
+        image: incora.azurecr.io/ics-operations-app:latest
+        imagePullPolicy: IfNotPresent
+        resources: {}
+        livenessProbe:
+          httpGet:
+            path: /diagnostics/liveness
+            port: 8080
+          initialDelaySeconds: 3
+          periodSeconds: 5
+          failureThreshold: 1
+          terminationGracePeriodSeconds: 60
+        readinessProbe:
+          httpGet:
+            path: /diagnostics/readiness
+            port: 8080
+          initialDelaySeconds: 3
+          periodSeconds: 5
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+            - ALL
+      imagePullSecrets:
+      - name: acr-secret
+status: {}

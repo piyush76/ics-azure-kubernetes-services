@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ics-operations-app
+  name: ics-operations-app
+spec:
+  template:
+    spec:
+      containers:
+      - name: ics-operations-app
+        image: <+artifact.image>

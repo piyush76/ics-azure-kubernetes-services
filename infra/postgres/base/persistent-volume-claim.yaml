@@ -1,0 +1,14 @@
+#
+# Placeholder for now.  Still need work to get PVs working in OpenShift.
+#
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-data-claim
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

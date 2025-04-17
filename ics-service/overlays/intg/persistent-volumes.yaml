@@ -1,0 +1,56 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ics-intg-msds-nfs-pv
+  labels:
+    type: ics-intg-msds-nfs-pv
+spec:
+  storageClassName: persistent-nfs-storage
+  claimRef:
+    name: ics-intg-msds-nfs-pv-claim
+    namespace: ics-intg
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    server: netapp.haasgroupintl.com
+    path: /ics_intg_msds
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ics-intg-receiptimages-nfs-pv
+  labels:
+    type: ics-intg-receiptimages-nfs-pv
+spec:
+  storageClassName: persistent-nfs-storage
+  claimRef:
+    name: ics-intg-receiptimages-nfs-pv-claim
+    namespace: ics-intg
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    server: netapp.haasgroupintl.com
+    path: /ics_intg_receiptimages
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ics-intg-docimages-nfs-pv
+  labels:
+    type: ics-intg-docimages-nfs-pv
+spec:
+  storageClassName: persistent-nfs-storage
+  claimRef:
+    name: ics-intg-docimages-nfs-pv-claim
+    namespace: ics-intg
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    server: netapp.haasgroupintl.com
+    path: /ics_intg_docimages

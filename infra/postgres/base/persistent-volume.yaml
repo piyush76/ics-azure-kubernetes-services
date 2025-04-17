@@ -1,0 +1,29 @@
+#
+# Placeholder for now.  Still need work to get PVs working in OpenShift.
+#
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: postgres-data
+  labels:
+    type: local
+spec:
+  volumeMode: Filesystem
+  storageClassName: local-storage
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Delete
+  local:
+    path: "/mnt/postgres/pgdata"
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - infpoc-oswrk01
+          - infpoc-oswrk02
+          - infpoc-oswrk03

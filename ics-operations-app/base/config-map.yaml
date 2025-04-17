@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ics-operations-app-config
+  labels:
+    app: ics-operations-app
+data:

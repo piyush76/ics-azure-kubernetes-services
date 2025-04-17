@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ics-service-template
+  name: ics-service-template
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ics-service-template
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: ics-service-template
+    spec:
+      containers:
+        - name: ics-service-template
+          image: incora.azurecr.io/ics-service-template:latest
+          imagePullPolicy: IfNotPresent
+          resources: {}
+          envFrom:
+            - configMapRef:
+                name: ics-service-template-config
+          env:
+          - name: SPRING_DATASOURCE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: tcmis-db-secret
+                key: TCMIS_DB_SECRET
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 9091
+            initialDelaySeconds: 45
+            periodSeconds: 5
+            failureThreshold: 1
+            terminationGracePeriodSeconds: 60
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 9091
+            initialDelaySeconds: 45
+            periodSeconds: 5
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
+            capabilities:
+              drop:
+                - ALL
+      imagePullSecrets:
+        - name: acr-secret
+status: {}

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ics-intg-tmp-nfs-pv-claim
+spec:
+  storageClassName: persistent-nfs-storage
+  volumeName: ics-intg-tmp-nfs-pv
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi

@@ -1,0 +1,7 @@
+resources:
+- service-account.yaml
+- secrets.yaml
+- config_map.yaml
+- roles.yaml
+- deployments.yaml
+- services.yaml

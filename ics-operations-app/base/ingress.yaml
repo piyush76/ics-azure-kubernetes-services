@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ics-operations-app-ingress
+  annotations:
+    route.openshift.io/termination: edge
+spec:
+  rules:
+  - host: ics-operations-app-dev.apps.infnp-osc.incora.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: ics-operations-app
+            port:
+              number: 8080
